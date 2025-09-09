@@ -1,4 +1,5 @@
 import string
+import streamlit as st
 
 # Definindo o alfabeto e os rotores
 ALPHABET = string.ascii_uppercase
@@ -64,12 +65,13 @@ def enigma(message, plugboard_pairs):
 
     return ''.join(encrypted_message)
 
-# Teste da máquina Enigma
-"""
-message = input("Digite uma mensagem para ser criptografada: ")
-plugboard_pairs = [('A', 'B'), ('C', 'D')]  # Configuração do painel de conectores
-encrypted_message = enigma(message, plugboard_pairs)
+st.markdown("""
+            # Máquina Enigma
+            ### O que é?
+            """)
+message = st.text_input("Digite uma mensagem para ser criptografada")
 
-print("Mensagem Original: ", message)
-print("Mensagem Encriptada: ", encrypted_message)
-"""
+plugboard_pairs = [('A', 'B'), ('C', 'D')]
+if message:
+    st.success(f"Mensagem criptografada: {enigma(message, plugboard_pairs)}")
+    st.success(f"Mensagem Original: {message}")

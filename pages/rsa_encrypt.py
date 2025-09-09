@@ -2,6 +2,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
+import streamlit as st
 
 # Função para gerar as chaves RSA (pública e privada)
 def generate_keys():
@@ -52,30 +53,51 @@ def serialize_keys(private_key, public_key):
 
     return pem_private_key, pem_public_key
 
-"""
-# Função principal
-def main():
-    # Gerar chaves
-    private_key, public_key = generate_keys()
+st.session_state.setdefault("texto", "")
+st.session_state.setdefault("private_key", "")
+st.session_state.setdefault("public_key", "")
 
-    # Exibir as chaves (opcional)
-    pem_private_key, pem_public_key = serialize_keys(private_key, public_key)
-    print("Chave privada:\n", pem_private_key.decode())
-    print("Chave pública:\n", pem_public_key.decode())
+def mood(modo, private_key, public_key):
+    label = f"Informe o texto a ser {modo}"
+    st.session_state.texto = st.text_input(label, key="text_input")
 
-    # Solicitar a mensagem do usuário
-    message = input("Digite a mensagem que deseja criptografar: ")
+    # Ao pressionar Enter no text_input, o app reroda e este bloco mostra o resultado
+    if modo == 'criptografado':
+        st.write(public_key)
+        result = encrypt_message(public_key ,st.session_state.texto)
+        titulo = f"Texto {modo}"
 
-    # Criptografar a mensagem
-    encrypted_message = encrypt_message(public_key, message)
-    print(f"\nMensagem criptografada: {encrypted_message}")
+        if st.session_state.texto != "":
+            st.success(f"{titulo}: {result}")
 
-    # Decriptografar a mensagem
-    decrypted_message = decrypt_message(private_key, encrypted_message)
-    print(f"\nMensagem decriptografada: {decrypted_message}")
+    if modo == 'descriptografado':
+        result = decrypt_message(private_key, st.session_state.texto)
+        titulo = f"Texto {modo}"
 
-# Executar o programa
-if __name__ == "__main__":
-    main()
+        if st.session_state.texto != "":
+            st.success(f"{titulo}: {result}")
 
-"""
+    return modo
+
+def gerar_chaves():
+    st.session_state.private_key, st.session_state.public_key = generate_keys()
+
+st.markdown("""
+            # RSA
+            ### O que é?
+            """)
+
+click = st.button("Gerar chaves", on_click=gerar_chaves, width="stretch")
+
+if click:
+    pem_private_key, pem_public_key = serialize_keys(st.session_state.private_key, st.session_state.public_key)
+    st.write("Chave privada:\n\n", pem_private_key.decode())
+    st.write("Chave pública:\n\n", pem_public_key.decode())
+
+message = st.text_input("Digite uma mensagem para ser criptografada")
+
+if message:
+    encrypted_message = encrypt_message(st.session_state.public_key, message)
+    decrypted_message = decrypt_message(st.session_state.private_key, encrypted_message)
+    st.success(f"Mensagem criptograda: {encrypted_message}")
+    st.success(f"Mensagem descriptograda: {decrypted_message}")

@@ -53,7 +53,16 @@ def start_decode():
 st.markdown("""
             # Cifra de Cesar
             ### O que é?
-            A Cifra de César é um tipo de cifra de substituição onde cada letra do texto é substituída por outra, que se encontra um número fixo de posições além dela no alfabeto. É considerada o primeiro método documentado de criptografia da história, tendo sido utilizada por Júlio César em suas comunicações militares.""")
+
+            Em criptografia, a Cifra de César, também conhecida como cifra de troca, código de César ou troca de César, é uma das mais simples e conhecidas técnicas de criptografia.
+            É considerada o primeiro método documentado de criptografia da história, tendo sido utilizada por Júlio César em suas comunicações militares.
+
+            ### Como funciona?
+            
+            A Cifra de César é um tipo de cifra de substituição onde cada letra do texto é substituída por outra, que se encontra um número fixo de posições além dela no alfabeto. 
+            """)
+
+st.image("https://1.bp.blogspot.com/-hkyQkYU53tU/YOH2NbrkQ7I/AAAAAAAAbPY/LHnSHopDZmkvI3VUkocL6YiK-BPo_yJBQCLcBGAsYHQ/s800/Caesar3.png", caption="Cifra de Cesar")
 
 encode, decode = st.columns(2)
 encode.button("Codificar", on_click=start_encode)

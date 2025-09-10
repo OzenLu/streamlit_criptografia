@@ -68,7 +68,16 @@ def enigma(message, plugboard_pairs):
 st.markdown("""
             # Máquina Enigma
             ### O que é?
+
+            Enigma foi uma máquina eletromecânica de criptografia com rotores. Utilizada tanto para criptografar como para descriptografar códigos de guerra, foi usada de várias formas na Europa a partir dos anos 1920.
+
+            ### Como funciona?
+
+            Tal como outras máquinas com rotores, a Máquina Enigma é uma combinação de sistemas mecânicos e elétricos. O mecanismo consiste num teclado, num conjunto de discos rotativos chamados rotores, dispostos em fila; e de um mecanismo de avanço que faz andar alguns rotores uma posição quando uma tecla é pressionada. O mecanismo varia entre diversas versões da máquina, mas o mais comum é o rotor colocado à direita avançar uma posição com cada tecla premida, e ocasionalmente despoletar o movimento rotativo dos restantes rotores, à sua esquerda, à semelhança do mecanismo conta-quilómetros de um automóvel. O movimento contínuo dos rotores provoca diferentes combinações na criptografia.
             """)
+
+st.image("https://upload.wikimedia.org/wikipedia/commons/0/0a/Enigma_Machine_at_NSA.jpg", caption="Máquina Enigma com três rotores, teclado, luzes e conexões para câmbio de codificação", width="stretch")
+
 message = st.text_input("Digite uma mensagem para ser criptografada")
 
 plugboard_pairs = [('A', 'B'), ('C', 'D')]

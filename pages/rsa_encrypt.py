@@ -83,9 +83,17 @@ def gerar_chaves():
     st.session_state.private_key, st.session_state.public_key = generate_keys()
 
 st.markdown("""
-            # RSA
+            # Criptografia RSA
             ### O que é?
+
+            **RSA (Rivest-Shamir-Adleman)** é um dos primeiros sistemas de criptografia de chave pública e é amplamente utilizado para transmissão segura de dados. Neste sistema de criptografia, a chave de encriptação é pública e é diferente da chave de decriptação que é secreta (privada). Um usuário do **RSA** cria e publica uma chave (chave pública) baseada em dois números primos grandes, junto com um valor auxiliar. Os números primos devem ser mantidos secretos.
+
+            ### Como funciona?
+
+            O RSA envolve um par de chaves, uma chave pública que pode ser conhecida por todos e uma chave privada que deve ser mantida em sigilo. Toda mensagem cifrada usando uma chave pública só pode ser decifrada usando a respectiva chave privada. A criptografia RSA atua diretamente na internet, por exemplo, em mensagens de emails, em compras on-line e o que você imaginar; tudo isso é encriptado e decriptado pela criptografia RSA.
             """)
+
+st.image("https://tse1.mm.bing.net/th/id/OIP.-cWt7M0nTFV32RbGdbUutgHaE4?rs=1&pid=ImgDetMain&o=7&rm=3", caption="Funcionamento RSA", width="stretch")
 
 click = st.button("Gerar chaves", on_click=gerar_chaves, width="stretch")
 

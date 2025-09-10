@@ -68,9 +68,17 @@ def start_decrypt():
 
 
 st.markdown("""
-            # Cifra de Cesar
+            # Cifra de Vigenère
             ### O que é?
+
+            A cifra de Vigenère é um método de criptografia que usa uma série de diferentes cifras de César baseadas em letras de uma senha.
+
+            ### Como ela funciona?
+
+            Numa cifra de César, cada letra do alfabeto é deslocada da sua posição um número fixo de lugares; por exemplo, se tiver um deslocamento de 3, "A" torna-se "D", "B" fica "E", etc. A cifra de Vigenère consiste no uso de várias cifras de César em sequência, com diferentes valores de deslocamento ditados por uma "palavra-chave".
             """)
+
+st.image("https://upload.wikimedia.org/wikipedia/commons/9/9a/Vigen%C3%A8re_square_shading.svg", caption="A grade de Vigenère, conhecido também por tabula recta, usado para criptografia e descriptografia")
 
 encode, decode = st.columns(2)
 encode.button("Criptografar", on_click=start_encrypt)
